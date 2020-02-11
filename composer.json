@@ -1,0 +1,26 @@
+{
+    "name": "maloja/pico-leaflet",
+    "type": "pico-plugin",
+    "description": "Interactive maps for Pico CMS.",
+    "keywords": [ "pico", "picocms", "picocms-plugin", "pico-leaflet", "maps", "tracks" ],
+    "homepage": "https://github.com/maloja/pico-leaflet",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maloja",
+            "homepage": "https://github.com/maloja/pico-leaflet",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "docs": "http://picocms.org/docs/pico-leaflet/",
+        "issues": "https://github.com/maloja/pico-leaflet/issues",
+        "source": "https://github.com/maloja/pico-leaflet"
+    },
+    "require": {
+        "php": ">=5.3.6"
+    },
+    "autoload": {
+        "classmap": [ "PicoLeaflet.php" ]
+    }
+}
