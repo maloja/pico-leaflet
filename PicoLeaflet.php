@@ -21,7 +21,7 @@ class PicoLeaflet extends AbstractPicoPlugin {
     private $argp = array();
     private $argp_default = array (
                                     'center'    => '47.5833, 9.1175',
-                                    'zoom'      => 10,
+									'zoom'		=> '0',
                                     'height'    => '300px',
                                     'width'     => '100%',
 								  );
@@ -31,9 +31,19 @@ class PicoLeaflet extends AbstractPicoPlugin {
      * Triggered after Pico has prepared the raw file contents for parsing
      */
     public function onContentParsed(&$content) {
-        $content = preg_replace_callback( '/\\<p\\>\s*\\(\\%\s*' . $this->p_keyword . ':(.*?)?' . '\s*\\%\\)\s*\\<\\/p\\>/si', function ($match) {
+        //$content = preg_replace_callback( '/\\<p\\>\s*\\(\\%\s*' . $this->p_keyword . ':(.*?)?' . '\s*\\%\\)\s*\\<\\/p\\>/si', function ($match) {
+		
+        $content = preg_replace_callback( '/<p>\s*\(%\s+' . $this->p_keyword . ':\s+(.*?)%\)\s*({(.*)})?\s*<\/p>/si', function ($match) {
             if ($match[1]) $this->prepareARGP($match[1]);
-            $out = $this->createOutput($this->p_count);
+
+			$clsid = '';
+			if ($match[3]) {
+				$clsid = preg_replace( array('/\./', '/#/'), array('class="', 'id="'), $match[3]);
+				$clsid .= '"';
+			}
+			$out = "<div {$clsid}>\n";
+            $out .= $this->createOutput($this->p_count);
+			$out .= "</div>\n";
             $this->p_count++;
             return $out;
         }, $content);
@@ -86,7 +96,7 @@ class PicoLeaflet extends AbstractPicoPlugin {
     private function createOutput(&$id) {
         if  ($this->plugin_path == "") $this->plugin_path = $this->getConfig('plugins_url') . 'PicoLeaflet/';
 		$this->setMapSize($id);
-        $out  = "\n<!-- PicoOpenStreetMap for map_{$id} -->\n";
+        $out .= "<!-- PicoLeaflet for map_{$id} -->\n";
         $out .= '<div style="max-width:' . $this->argp[$id]['width'] . '; padding-top:' . $this->argp[$id]['height'] . '; position: relative">' . "\n";
         $out .= '<div id="map_' . $id . '" tabindex="' . $id . '" class="map" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"></div>' . "\n";
         $out .= "</div>\n";
@@ -155,7 +165,7 @@ class PicoLeaflet extends AbstractPicoPlugin {
             }
         }
         $out .=  "</script>\n";
-        $out .= "<!-- EndPicoOpenStreetMap for $id -->\n";
+        $out .= "<!-- EndLeaflet for $id -->\n";
         return  $out;
     }
 

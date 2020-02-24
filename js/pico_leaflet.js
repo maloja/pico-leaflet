@@ -38,11 +38,14 @@ map_<<$id>>.on('layeradd', function(e) {
         }
     });
     if (e.layer instanceof L.FeatureGroup) {
-        if (bounds.isValid()) {
-            map_<<$id>>.fitBounds(bounds);
-        } else {
-            map_<<$id>>.fitWorld();
-        }
+        	if (bounds.isValid() ) {
+            	map_<<$id>>.fitBounds(bounds);
+				if (<<$this->argp[$id]['zoom']>> > 0 ) {
+					map_<<$id>>.setZoom(<<$this->argp[$id]['zoom']>>);
+				}
+        	} else {
+            	map_<<$id>>.fitWorld();
+        	}
     }
 });
 

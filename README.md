@@ -51,6 +51,15 @@ Add the following expression in your Markdown file. The expression will be repla
 
 - `gpxfile = filename`: Routes can also be shown on the maps. The data must be in GPX v1.0 or GPX v1.1 format. The gpxfile line may appear several times
 
+### Adding a CSS id or class
+
+It is also possible to add a CSS id or class according to the markdown syntax.    
+Examples:
+
+~~~
+(% map ..... %){#id}
+(% map ..... %){.class}
+~~~
 
 
 ## Additional Ccmponents
