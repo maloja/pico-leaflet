@@ -1,3 +1,7 @@
+# !!! End Of Life Notice !!!
+
+The further development of PicoCMS was discontinued a long time ago. This means that also this project has come to its end. The repository “maloja/pico-leaflet" will be removed in the near future. If you would like to continue using any useful lines of code from this repository, please copy them into your own project.
+
 # PicoLeaflet
 
 Interactive maps for [Pico CMS](http://picocms.org). This plugin is based on [Leaflet](https://leafletjs.com) the leading open-source JavaScript library for mobile-friendly interactive maps. In addition, markers, waypoints and routes can be easily added.
